@@ -1,4 +1,4 @@
-public with sharing class MaintenanceRequestTriggerHelper {
+public with sharing class MaintenanceRequestHelper {
     
     public void createNewRoutineMaintenance(Map<Id, MaintenanceRequestModel.MaintenanceRequestInfo> requests) {
         Map<Id, Case> newRequestsToCreate = new Map<Id, Case>(); //Key -> Closed Request's Id

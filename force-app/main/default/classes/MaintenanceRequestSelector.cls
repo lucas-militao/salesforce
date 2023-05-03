@@ -26,7 +26,9 @@ public with sharing class MaintenanceRequestSelector {
             equipment.maintenanceCycle = requestItem.Equipment__r.Maintenance_Cycle__c;
             mapOfMaintenanceRequestsInfo.get(requestItem.Maintenance_Request__c).equipments.put(equipment.id, equipment);
         }
-
+        
+        System.debug('REQUESTS >>>>>');
+        System.debug(mapOfMaintenanceRequestsInfo);
         return mapOfMaintenanceRequestsInfo;
     }
 }

@@ -1,3 +1,4 @@
-trigger MaintenanceRequest on Case (after update) {
+trigger MaintenanceRequest on Case (before update, after update) {
+    // ToDo: Call MaintenanceRequestHelper.updateWorkOrders
     new MaintenanceRequestTriggerHandler().run();
 }

@@ -1,6 +1,6 @@
 public with sharing class MaintenanceRequestHelper {
     
-    public void createNewRoutineMaintenance(Map<Id, MaintenanceRequestModel.MaintenanceRequestInfo> requests) {
+    public void updateWorkOrders(Map<Id, MaintenanceRequestModel.MaintenanceRequestInfo> requests) {
         Map<Id, Case> newRequestsToCreate = new Map<Id, Case>(); //Key -> Closed Request's Id
 
         for(Id requestId : requests.keyset()) {
@@ -10,7 +10,8 @@ public with sharing class MaintenanceRequestHelper {
                 Type = 'Routine Maintenance',
                 Subject = String.isEmpty(request.subject) ? 'Routine Maintenance' : request.subject,
                 Vehicle__c = request.vehicle,
-                Date_Due__c = this.getDueDate(request.equipments)
+                Date_Due__c = this.getDueDate(request.equipments),
+                Status = 'New'
             );
 
             newRequestsToCreate.put(requestId, newRequest);
@@ -34,6 +35,9 @@ public with sharing class MaintenanceRequestHelper {
         }
 
         insert newRequestsItems;
+
+        System.debug('REQUESTS CREATED >>>>>');
+        System.debug(newRequestsToCreate);
     }
 
     public Date getDueDate(Map<Id, MaintenanceRequestModel.Equipment> equipments) {

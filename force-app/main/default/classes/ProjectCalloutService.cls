@@ -27,8 +27,7 @@ public with sharing class ProjectCalloutService {
         }
     }
 
-    @Future(callout=true)
-    private static void postToPMS(String serviceToken, String jsonInput, Id oppoId){
+    private static void postToPMS(String serviceToken, String jsonInput, Id oppId){
         HTTPRequest req = new HTTPRequest();
         req.setEndPoint('callout:ProjectService');
         req.setMethod('POST');
@@ -37,7 +36,8 @@ public with sharing class ProjectCalloutService {
         req.setBody(jsonInput);        
         HTTP http = new HTTP();
         HTTPResponse res = http.send(req);        
-        Opportunity opp = new Opportunity(Id=oppoId);
+        Opportunity opp = new Opportunity(Id=oppId);
+        System.debug('RESPOSTA >>>>>> ' + res);
         if(res.getStatusCode() == 201){
             opp.StageName = 'Submitted Project';                
             System.debug('Success: ' + res.getStatus());

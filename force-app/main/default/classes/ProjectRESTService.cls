@@ -20,9 +20,6 @@ global class ProjectRESTService {
             List<SObject> upsertObjects = new List<SObject>{thisProject, opportunity};
             upsert upsertObjects;
             return 'OK';         
-        } catch (Exception e) {
-            Database.Rollback(sp);
-            return e.getMessage();
-        }
+        } catch (Exception e) { Database.Rollback(sp); return e.getMessage(); }
     }
 }

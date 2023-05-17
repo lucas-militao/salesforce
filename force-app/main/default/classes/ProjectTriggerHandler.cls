@@ -9,13 +9,13 @@ public with sharing class ProjectTriggerHandler extends TriggerHandler {
             Project__c newProject = newMap.get(projectId);
             Project__c oldProject = oldMap.get(projectId);
 
-            if (newProject.status = 'Billable' && oldProject.status != 'Billable') {
+            if (newProject.Status__c == 'Billable' && newProject.Status__c != null) {
                 mapOfProjectsToUpdate.put(projectId, newProject);
             }
         }
 
         if (mapOfProjectsToUpdate.size() > 0) {
-            
+            ProjectTriggerHelper.billingCalloutServiceCall(mapOfProjectsToUpdate);
         }
     }   
 }

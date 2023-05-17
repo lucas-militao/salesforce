@@ -7,7 +7,7 @@
 global class BillingCalloutService {
     //Implement business and callout logic methods here
     @future(callout = true)
-    webservice static void callBillingService(String projectRef, Decimal billingAmount) {
+    public static void callBillingService(String projectRef, Decimal billingAmount) {
         ServiceCredentials__c srvcCrd = ServiceCredentials__c.getValues('BillingServiceCredential');
 
         BillingServiceProxy.project projectInst = new BillingServiceProxy.project();
